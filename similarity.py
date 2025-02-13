@@ -78,11 +78,11 @@ for i in range(0, 10):
     for j in range(i + 1, 10):
         if docTermMatrix[i][j] > highest_similarity:
             highest_similarity = docTermMatrix[i][j]
-            doc_pairs = [i, j]
+            doc_pairs = [[i, j]]
         elif docTermMatrix[i][j] == highest_similarity:
             doc_pairs.append([i, j])
 
-print("The highest similarity score is: " + highest_similarity)
+print("The highest similarity score is: " + str(highest_similarity))
 print("The document pair(s) that share this score: ")
 for pair in doc_pairs:
     print("doc#" + pair[0] + "& doc#" + pair[1])
