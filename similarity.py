@@ -29,11 +29,10 @@ with open('cleaned_documents.csv', 'r') as csvfile:
 # the spaces as your character delimiter.
 #--> add your Python code here
 
-for document in documents:
-    document = document[1].split(" ")
-    #print(document)
-
 total_docs = len(documents)
+
+for index in range(0, total_docs):
+    documents[index] = documents[index][1].split(" ")
 
 docTermMatrix = []
 
@@ -43,12 +42,12 @@ docTermMatrix = []
 
 # initializing the matrix
 for i in range(0, total_docs):
-    row = [[0] * total_docs]
+    row = [1] * total_docs
     docTermMatrix.append(row)
 
 for i in range(0, total_docs):
-    for j in range(i, total_docs):
-        words = list(set(documents[i]).union(set(document[j])))
+    for j in range(i + 1, total_docs):
+        words = list(set(documents[i]).union(set(documents[j])))
         vector_1 = []
         vector_2 = []
 
@@ -64,7 +63,11 @@ for i in range(0, total_docs):
             else:
                 vector_2.append(0)
 
-        print(cosine_similarity([vector_1, vector_2]))
+        similarity = cosine_similarity([vector_1, vector_2])
+        docTermMatrix[i][j] = similarity[0][1]
+        docTermMatrix[j][i] = similarity[0][1]
+
+print(docTermMatrix)
 
 # Print the highest cosine similarity following the information below
 # The most similar documents are document 10 and document 100 with cosine similarity = x
