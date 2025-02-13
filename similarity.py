@@ -85,4 +85,4 @@ for i in range(0, 10):
 print("The highest similarity score is: " + str(highest_similarity))
 print("The document pair(s) that share this score: ")
 for pair in doc_pairs:
-    print("doc#" + pair[0] + "& doc#" + pair[1])
+    print("doc#" + str(pair[0]) + " & doc#" + str(pair[1]))
