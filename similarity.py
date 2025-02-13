@@ -64,11 +64,25 @@ for i in range(0, total_docs):
                 vector_2.append(0)
 
         similarity = cosine_similarity([vector_1, vector_2])
+
         docTermMatrix[i][j] = similarity[0][1]
         docTermMatrix[j][i] = similarity[0][1]
-
-print(docTermMatrix)
 
 # Print the highest cosine similarity following the information below
 # The most similar documents are document 10 and document 100 with cosine similarity = x
 # --> Add your Python code here
+highest_similarity = 0
+doc_pairs = []
+
+for i in range(0, 10):
+    for j in range(i + 1, 10):
+        if docTermMatrix[i][j] > highest_similarity:
+            highest_similarity = docTermMatrix[i][j]
+            doc_pairs = [i, j]
+        elif docTermMatrix[i][j] == highest_similarity:
+            doc_pairs.append([i, j])
+
+print("The highest similarity score is: " + highest_similarity)
+print("The document pair(s) that share this score: ")
+for pair in doc_pairs:
+    print("doc#" + pair[0] + "& doc#" + pair[1])
